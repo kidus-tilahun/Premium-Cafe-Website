@@ -1,0 +1,42 @@
+You are an expert senior frontend engineer and conversion rate optimization (CRO) specialist. Your task is to build a single-page, production-ready, fully responsive premium cafe website from scratch in a single shot. 
+
+The website must flawlessly merge a luxury/premium editorial aesthetic with an aggressive lead-generation and conversion strategy.
+
+### 1. DESIGN SYSTEM & VISUAL DNA (PREMIUM AESTHETIC)
+- Palette: Deep Charcoal (#1A1A1A), Rich Cream (#F9F6F0), Muted Sand (#E6DFD3), and a singular sophisticated accent like Brushed Terracotta (#C05A46).
+- Typography: Use a high-contrast serif font (e.g., Playfair Display or Cormorant Garamond) for headers to convey luxury, and a hyper-clean, geometric sans-serif (e.g., Inter or Montserrat) for body/UI text.
+- Layout: Editorial-style spacing with generous whitespace (negative space) so elements breathe. Avoid cluttered containers. Use asymmetrical grids for visual interest.
+- UI Elements: Smooth CSS micro-interactions (subtle hover expansions on buttons, elegant fades, underline transitions on input fields). No blocky, cheap components.
+
+### 2. CORE STRUCTURE & CONVERSION FLOW (TOP-TO-BOTTOM)
+
+[SECTION 1: HERO ZONE - ABOVE THE FOLD]
+- Visual: Large, immersive atmospheric background hero section (simulate a high-resolution ambient cafe space).
+- Copy: Editorial typography stating a clear value proposition: "Specialty Coffee & House-Baked Pastries in Downtown Austin."
+- Utility Anchor: Floating or integrated minimalist top bar displaying dynamic hours and location: "Open Until 7 PM • 4th & Main St."
+- Dual Call-to-Action (CTA): Two high-contrast, elegant outline/solid buttons side-by-side:
+  1. Primary CTA: [Order Online Now] (Stands out, anchors to e-commerce flow)
+  2. Secondary CTA: [View Menu & Hours] (Smooth scroll anchor to Section 2)
+
+[SECTION 2: EDITORIAL MENU & SMOOTH ORDERING]
+- Layout: Responsive, text-based interactive menu grid (NO flat PDFs). Grouped elegantly by Coffee, Tea, and House Pastries.
+- Interaction: Clicking an item should open a beautifully styled side-drawer component or modal allowing the user to configure micro-options (e.g., Oat Milk, Extra Shot) and add to cart, simulating a frictionless checkout path.
+
+[SECTION 3: THE PREMIUM LEAD TRAP]
+- Context: Smooth scroll transition where the background shifts from Cream to Deep Charcoal to signal a mood change.
+- Copy: Premium lead magnet hook. Do not use generic "Sign up for newsletter." Use: "Become a member of the Reserve List. Receive an invitation for a complimentary single-origin pour-over on your first visit, alongside exclusive small-batch drops."
+- Implementation: An ultra-minimalist, single-line input field for the email address with an elegant [Join] arrow button to maximize lead capture efficiency.
+
+[SECTION 4: SOCIAL PROOF & MICRO-CONVERSION]
+- Content: A beautiful horizontal carousel or grid displaying styled Google Review testimonials and minimalist placeholders for Instagram user-generated content (UGC).
+- Micro-Funnel: A subtle section targeting secondary revenue streams: "Host an Event" or "Inquire About Private Catering" leading to a functional inline contact form.
+
+[SECTION 5: SAFETY NET FOOTER]
+- Content: Lock essential logistical data. Interactive map element, definitive daily hours, parking tips ("Complimentary 2-hour parking validated behind the building"), and social media links.
+
+### 3. TECHNICAL & CODE REQUIREMENTS
+- Mobile-First Architecture: Ensure 100% thumb-friendly navigation and layouts, as 70%+ of traffic is mobile.
+- Code Quality: Write clean, semantic, well-commented code. Do not use shortcuts, placeholders, or "// TODO" comments. Build the complete, working functional layout.
+- Imagery: Use highly descriptive Unsplash placeholders for images that reflect premium latte art, concrete coffee bars, and minimalist cafe aesthetics.
+
+Generate the complete, end-to-end code for this premium high-converting cafe website now.
