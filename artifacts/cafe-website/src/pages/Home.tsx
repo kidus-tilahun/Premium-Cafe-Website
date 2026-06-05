@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Instagram, Twitter, MapPin } from "lucide-react";
 
 const TESTIMONIALS = [
@@ -10,12 +10,12 @@ const TESTIMONIALS = [
   { quote: "Single-origin Ethiopian was a revelation. The staff clearly love what they do.", author: "Chris M." },
 ];
 
-const reveal = {
+const reveal: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
-const stagger = {
+const stagger: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12 } },
 };

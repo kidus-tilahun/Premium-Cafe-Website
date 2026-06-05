@@ -1,0 +1,24 @@
+Correction: The Menu Item Detail Modal is broken across ALL viewports (Desktop, Tablet, and Mobile). The centering and layout logic are fundamentally flawed. We need to completely rewrite the layout structure of this pop-up component using standard, foolproof CSS positioning that works universally.
+
+Please completely replace the modal's outer structure with this exact, bulletproof responsive layout blueprint:
+
+1. THE BACKDROP OVERLAY (FIXED CENTERING)
+- The fixed backdrop wrapper must span the entire screen, blur the background, and use Flexbox to perfectly center its child on all devices:
+  `fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm`
+
+2. THE MODAL CONTAINER (UNIVERSAL SCROLL & SIZE)
+- The actual modal card container needs a strict max-height so it never overflows the screen on any device, and it must allow scrolling inside if content is long:
+  `relative w-full max-w-[92%] sm:max-w-xl md:max-w-3xl max-h-[90vh] overflow-y-auto bg-neutral-900 rounded-2xl shadow-2xl`
+- (Ensure the background color matches our premium dark/neutral cafe aesthetic).
+
+3. THE CONTENT SPLIT (STACKED VS SIDE-BY-SIDE)
+- Use a fluid grid that automatically adapts based on screen size. It must be a single vertical column on mobile/tablet, and smoothly split into two equal columns on desktop:
+  `grid grid-cols-1 md:grid-cols-2 gap-6 p-6 md:p-8`
+- Left side/Top side: The menu item image (`w-full aspect-square object-cover rounded-xl`).
+- Right side/Bottom side: A flex container holding the title, price, description, and tags with elegant spacing (`flex flex-col justify-between space-y-4`).
+
+4. ABSOLUTE TOP-RIGHT CLOSE BUTTON
+- Position the close 'X' button independently so it is instantly clickable on desktop, tablet, and phone:
+  `absolute top-4 right-4 z-50 p-2 rounded-full bg-neutral-800 text-white hover:bg-neutral-700 transition-colors`
+
+Re-compile the selected menu item modal component using these structural layout rules. Keep 100% of the existing fonts, colors, and descriptions, but enforce this strict, bulletproof responsive container system now.

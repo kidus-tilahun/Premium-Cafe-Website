@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose } from "@/components/ui/drawer";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { X } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -107,7 +107,7 @@ const MENU_ITEMS: MenuItem[] = [
   },
 ];
 
-const reveal = {
+const reveal: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" } },
 };
@@ -238,89 +238,124 @@ export default function MenuPage() {
         </motion.div>
       </div>
 
-      {/* Item drawer */}
-      <Drawer open={!!selectedItem} onOpenChange={(open) => !open && setSelectedItem(null)} direction="right">
-        <DrawerContent className="right-0 top-0 bottom-0 mt-0 w-full sm:w-[420px] h-full rounded-none border-l border-white/[0.07] bg-[#0D0D0D]">
-          {selectedItem && (
-            <>
-              <div className="relative h-56 overflow-hidden shrink-0">
-                <img
-                  src={selectedItem.image}
-                  alt={selectedItem.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-black/20 to-transparent" />
-              </div>
-              <DrawerHeader className="text-left px-8 pt-6 pb-0">
-                <p className="text-[9px] tracking-[0.3em] uppercase text-[#C05A46]/70 font-sans mb-2">
-                  {selectedItem.category}
-                </p>
-                <DrawerTitle className="font-serif font-light text-white text-3xl leading-tight">
-                  {selectedItem.name}
-                </DrawerTitle>
-                <DrawerDescription className="text-sm text-white/40 font-sans font-light mt-2 leading-relaxed">
-                  {selectedItem.description}
-                </DrawerDescription>
-                <p className="text-[#C05A46] font-sans font-light mt-3 text-base">${selectedItem.price}.00</p>
-              </DrawerHeader>
+      {/* Item modal */}
+      <AnimatePresence>
+        {selectedItem && (
+          <motion.div
+            key="modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            onClick={() => setSelectedItem(null)}
+          >
+            <motion.div
+              key="modal-card"
+              initial={{ opacity: 0, scale: 0.96, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 12 }}
+              transition={{ duration: 0.28, ease: "easeOut" }}
+              className="relative w-full max-w-[92%] sm:max-w-xl md:max-w-3xl max-h-[90vh] overflow-y-auto bg-neutral-900 rounded-2xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedItem(null)}
+                data-testid="btn-close-modal"
+                className="absolute top-4 right-4 z-50 p-2 rounded-full bg-neutral-800 text-white hover:bg-neutral-700 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
 
-              <div className="p-8 space-y-8 flex-1 overflow-y-auto">
-                {selectedItem.hasMilkOption && (
-                  <div className="space-y-4">
-                    <p className="text-[10px] tracking-[0.3em] uppercase text-white/30 font-sans">Milk Options</p>
-                    <RadioGroup defaultValue="whole" className="space-y-3">
-                      {[
-                        { value: "whole", label: "Whole Milk" },
-                        { value: "oat", label: "Oat Milk", note: "+ $1.00" },
-                        { value: "almond", label: "Almond Milk", note: "+ $1.00" },
-                        { value: "skim", label: "Skim Milk" },
-                      ].map((opt) => (
-                        <div key={opt.value} className="flex items-center gap-4">
-                          <RadioGroupItem value={opt.value} id={`milk-${opt.value}`} className="border-white/20" />
-                          <Label htmlFor={`milk-${opt.value}`} className="text-white/55 font-sans font-light text-sm cursor-pointer flex gap-2 items-baseline">
-                            {opt.label}
-                            {opt.note && <span className="text-white/25 text-xs">{opt.note}</span>}
-                          </Label>
-                        </div>
-                      ))}
-                    </RadioGroup>
+              {/* Content split: stacked on mobile, side-by-side on desktop */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 md:p-8">
+                {/* Image */}
+                <div className="overflow-hidden rounded-xl">
+                  <img
+                    src={selectedItem.image}
+                    alt={selectedItem.name}
+                    className="w-full aspect-square object-cover rounded-xl"
+                  />
+                </div>
+
+                {/* Details */}
+                <div className="flex flex-col justify-between space-y-4">
+                  <div>
+                    <p className="text-[9px] tracking-[0.3em] uppercase text-[#C05A46]/70 font-sans mb-2">
+                      {selectedItem.category}
+                    </p>
+                    <h2 className="font-serif font-light text-white text-2xl md:text-3xl leading-tight">
+                      {selectedItem.name}
+                    </h2>
+                    <p className="text-sm text-white/40 font-sans font-light mt-2 leading-relaxed">
+                      {selectedItem.description}
+                    </p>
+                    <p className="text-[#C05A46] font-sans font-light mt-3 text-base">
+                      ${selectedItem.price}.00
+                    </p>
                   </div>
-                )}
 
-                {(selectedItem.category === "Signature Drinks" || selectedItem.category === "Slow Bar") && (
-                  <div className="flex items-center justify-between border-t border-white/[0.06] pt-6">
-                    <Label htmlFor="extra-shot" className="text-sm text-white/55 font-sans font-light cursor-pointer">
-                      Extra Espresso Shot
-                      <span className="text-white/25 ml-2 text-xs">(+ $2.00)</span>
-                    </Label>
-                    <Switch id="extra-shot" />
+                  {/* Customisation options */}
+                  <div className="space-y-6">
+                    {selectedItem.hasMilkOption && (
+                      <div className="space-y-3">
+                        <p className="text-[10px] tracking-[0.3em] uppercase text-white/30 font-sans">Milk Options</p>
+                        <RadioGroup defaultValue="whole" className="space-y-2">
+                          {[
+                            { value: "whole", label: "Whole Milk" },
+                            { value: "oat", label: "Oat Milk", note: "+ $1.00" },
+                            { value: "almond", label: "Almond Milk", note: "+ $1.00" },
+                            { value: "skim", label: "Skim Milk" },
+                          ].map((opt) => (
+                            <div key={opt.value} className="flex items-center gap-3">
+                              <RadioGroupItem value={opt.value} id={`milk-${opt.value}`} className="border-white/20" />
+                              <Label htmlFor={`milk-${opt.value}`} className="text-white/55 font-sans font-light text-sm cursor-pointer flex gap-2 items-baseline">
+                                {opt.label}
+                                {opt.note && <span className="text-white/25 text-xs">{opt.note}</span>}
+                              </Label>
+                            </div>
+                          ))}
+                        </RadioGroup>
+                      </div>
+                    )}
+
+                    {(selectedItem.category === "Signature Drinks" || selectedItem.category === "Slow Bar") && (
+                      <div className="flex items-center justify-between border-t border-white/[0.06] pt-4">
+                        <Label htmlFor="extra-shot" className="text-sm text-white/55 font-sans font-light cursor-pointer">
+                          Extra Espresso Shot
+                          <span className="text-white/25 ml-2 text-xs">(+ $2.00)</span>
+                        </Label>
+                        <Switch id="extra-shot" />
+                      </div>
+                    )}
+
+                    {/* Action buttons */}
+                    <div className="flex flex-col gap-3 pt-2">
+                      <Button
+                        className="w-full bg-[#C05A46] hover:bg-[#C05A46]/85 text-white py-6 text-[10px] tracking-[0.22em] uppercase font-sans font-medium rounded-none"
+                        data-testid="btn-add-to-order"
+                        style={{ borderRadius: 0 }}
+                      >
+                        Add to Order
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => setSelectedItem(null)}
+                        className="w-full border-white/10 text-white/40 hover:text-white hover:bg-white/[0.03] rounded-none text-[10px] tracking-[0.22em] uppercase font-sans py-5"
+                        data-testid="btn-cancel-order"
+                        style={{ borderRadius: 0 }}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
-
-              <DrawerFooter className="border-t border-white/[0.06] p-8 bg-[#0D0D0D] gap-3">
-                <Button
-                  className="w-full bg-[#C05A46] hover:bg-[#C05A46]/85 text-white py-6 text-[10px] tracking-[0.22em] uppercase font-sans font-medium rounded-none"
-                  data-testid="btn-add-to-order"
-                  style={{ borderRadius: 0 }}
-                >
-                  Add to Order
-                </Button>
-                <DrawerClose asChild>
-                  <Button
-                    variant="outline"
-                    className="w-full border-white/10 text-white/40 hover:text-white hover:bg-white/[0.03] rounded-none text-[10px] tracking-[0.22em] uppercase font-sans py-5"
-                    data-testid="btn-cancel-order"
-                    style={{ borderRadius: 0 }}
-                  >
-                    Cancel
-                  </Button>
-                </DrawerClose>
-              </DrawerFooter>
-            </>
-          )}
-        </DrawerContent>
-      </Drawer>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

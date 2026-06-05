@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { ArrowRight, Users, Camera, Briefcase } from "lucide-react";
 
 const EVENT_TYPES = [
@@ -22,7 +22,7 @@ const EVENT_TYPES = [
 
 const STEPS = ["About You", "Your Event", "Final Details"];
 
-const reveal = {
+const reveal: Variants = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
