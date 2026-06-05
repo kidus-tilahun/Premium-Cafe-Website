@@ -1,0 +1,26 @@
+You completely under-delivered on the premium visual experience. A luxury cafe website cannot just be a flat, text-heavy single-page layout with no navigation. We are rebuilding this properly. 
+
+Modify the Next.js architecture to include a fully functional Header/Navigation system and a true 3-page structure (Home, The Menu, and Private Events/Catering) using Next.js App Router folders, alongside a massive visual upgrade to the menu.
+
+### 1. THE ARCHITECTURE & PREMIUM NAVIGATION
+- Create a global, persistent `<Navbar />` component. 
+- The Navbar must be absolute/fixed, glassmorphic (`bg-black/10 backdrop-blur-md border-b border-white/[0.05]`), containing a minimalist serif Logo on the left, elegant centered links with smooth hover underlines (Home, Menu, Private Events), and a prominent, high-contrast action button on the far right: `[ Order Online ]`.
+- Separate the site into 3 clear page routes:
+  1. `/` (The Editorial Home Page with the Lead Trap)
+  2. `/menu` (The Highly Visual Interactive Menu)
+  3. `/events` (The Private Catering / Space Rental Lead Funnel)
+
+### 2. THE VISUAL MENU OVERHAUL (Page: `/menu`)
+- Delete the plain text-based menu. Replace it with a premium, highly visual, image-forward masonry or asymmetrical card grid.
+- Each menu item must be housed in a gorgeously styled `<MenuCard />`.
+- Card Design: 
+  - A fixed, vertical aspect ratio image container (`aspect-[4/5]`) featuring crisp close-up photography of the item (e.g., a textured, glossy iced matcha latte, an artisanal flaky croissant).
+  - Use a subtle zoom-in effect on the image when the card is hovered (`group-hover:scale-105 transition-transform duration-700`).
+  - Overlay the item name, price, and a minimal description elegantly at the bottom of the card using a smooth gradient vignette or clean card typography.
+- Interactive Filter Bar: Add a minimal, horizontal sticky category selector at the top of the page (Signature Drinks, Slow Bar, House Pastries, Kitchen) that filters the cards with a smooth Framer Motion layout animation.
+
+### 3. THE EVENTS LEAD FUNNEL (Page: `/events`)
+- Create an editorial landing page dedicated to high-ticket conversions (buying out the cafe for photoshoots, corporate meetings, or weekend gatherings).
+- Include an elegant multi-step inquiry form that captures name, event date, guest count, and email, framed by stunning interior architecture photos.
+
+Re-architect the project and output the updated Next.js code for the global Navbar, the visual `/menu` page component, and the updated layout files now. No shortcuts, no placeholders. Build it beautifully.
