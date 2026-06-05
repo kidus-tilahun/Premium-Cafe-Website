@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import MenuPage from "@/pages/Menu";
 import EventsPage from "@/pages/Events";
 import Navbar from "@/components/Navbar";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ function Router() {
         <Route path="/events" component={EventsPage} />
         <Route component={NotFound} />
       </Switch>
+      <ScrollToTop />
     </>
   );
 }
