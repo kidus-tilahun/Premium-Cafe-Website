@@ -344,29 +344,25 @@ export default function EventsPage() {
               )}
 
               {step < STEPS.length - 1 ? (
-                <motion.button
+                <button
                   onClick={() => canAdvance() && setStep((s) => s + 1)}
                   data-testid="btn-events-next"
-                  whileHover={canAdvance() ? { letterSpacing: "0.14em" } : {}}
-                  transition={{ duration: 0.3 }}
-                  className={`flex items-center gap-3 bg-[#C05A46] text-white px-10 py-4 text-[10px] tracking-[0.22em] uppercase font-sans transition-opacity ${
-                    canAdvance() ? "opacity-100" : "opacity-30 cursor-not-allowed"
+                  className={`flex items-center gap-3 bg-[#C05A46] text-white px-10 py-4 text-[10px] tracking-[0.22em] uppercase font-sans transition-all duration-300 ease-out ${
+                    canAdvance() ? "opacity-100 hover:bg-[#C05A46]/85" : "opacity-30 cursor-not-allowed"
                   }`}
                   style={{ borderRadius: 0 }}
                 >
                   Continue <ArrowRight className="w-3.5 h-3.5" />
-                </motion.button>
+                </button>
               ) : (
-                <motion.button
+                <button
                   onClick={handleSubmit}
                   data-testid="btn-events-submit"
-                  whileHover={{ letterSpacing: "0.14em" }}
-                  transition={{ duration: 0.3 }}
-                  className="flex items-center gap-3 bg-[#C05A46] text-white px-10 py-4 text-[10px] tracking-[0.22em] uppercase font-sans"
+                  className="flex items-center gap-3 bg-[#C05A46] hover:bg-[#C05A46]/85 text-white px-10 py-4 text-[10px] tracking-[0.22em] uppercase font-sans transition-all duration-300 ease-out"
                   style={{ borderRadius: 0 }}
                 >
                   Send Inquiry <ArrowRight className="w-3.5 h-3.5" />
-                </motion.button>
+                </button>
               )}
             </div>
           </div>

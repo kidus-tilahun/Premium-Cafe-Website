@@ -68,15 +68,13 @@ export default function Navbar() {
 
           <div className="hidden md:block">
             <Link href="/menu">
-              <motion.span
-                whileHover={{ letterSpacing: "0.14em" }}
-                transition={{ duration: 0.3 }}
-                className="inline-flex items-center bg-[#C05A46] text-white px-7 py-2.5 text-[10px] tracking-[0.22em] uppercase font-sans cursor-pointer"
+              <span
+                className="inline-flex items-center bg-[#C05A46] hover:bg-[#C05A46]/85 text-white px-7 py-2.5 text-[10px] tracking-[0.22em] uppercase font-sans cursor-pointer transition-opacity duration-300 ease-out"
                 style={{ borderRadius: 0 }}
                 data-testid="nav-btn-order"
               >
                 Order Online
-              </motion.span>
+              </span>
             </Link>
           </div>
 

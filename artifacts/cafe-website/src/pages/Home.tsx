@@ -44,7 +44,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/75" />
         <div className="absolute inset-0 mix-blend-multiply bg-[#1A1A1A]/20" />
 
-        <div className="absolute top-0 left-0 right-0 py-5 px-8 md:px-16 flex justify-between items-center z-20">
+        <div className="absolute top-0 left-0 right-0 pt-20 pb-5 md:py-5 px-8 md:px-16 flex justify-between items-center z-20">
           <span data-testid="utility-hours" className="text-[10px] tracking-[0.3em] uppercase text-white/55 font-sans">
             Open Until 7 PM
           </span>
@@ -76,26 +76,22 @@ export default function Home() {
             </motion.p>
             <motion.div variants={reveal} className="flex flex-col sm:flex-row gap-4">
               <Link href="/menu">
-                <motion.span
-                  whileHover={{ letterSpacing: "0.12em" }}
-                  transition={{ duration: 0.35 }}
-                  className="inline-flex items-center justify-center bg-[#C05A46] text-white px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-sans font-medium cursor-pointer"
+                <span
+                  className="inline-flex items-center justify-center bg-[#C05A46] hover:bg-[#C05A46]/85 text-white px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-sans font-medium cursor-pointer transition-all duration-300 ease-out"
                   style={{ borderRadius: 0 }}
                   data-testid="link-order-now"
                 >
                   Order Online Now
-                </motion.span>
+                </span>
               </Link>
               <Link href="/menu">
-                <motion.span
-                  whileHover={{ letterSpacing: "0.12em", backgroundColor: "rgba(255,255,255,0.08)" }}
-                  transition={{ duration: 0.35 }}
-                  className="inline-flex items-center justify-center border border-white/30 text-white px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-sans font-medium cursor-pointer"
+                <span
+                  className="inline-flex items-center justify-center border border-white/30 hover:border-white/60 hover:bg-white/[0.08] text-white px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-sans font-medium cursor-pointer transition-all duration-300 ease-out"
                   style={{ borderRadius: 0 }}
                   data-testid="link-view-menu"
                 >
                   View Menu &amp; Hours
-                </motion.span>
+                </span>
               </Link>
             </motion.div>
           </motion.div>
@@ -128,14 +124,12 @@ export default function Home() {
               </motion.p>
               <motion.div variants={reveal}>
                 <Link href="/menu">
-                  <motion.span
-                    whileHover={{ letterSpacing: "0.14em" }}
-                    transition={{ duration: 0.3 }}
-                    className="inline-flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase font-sans text-[#C05A46] cursor-pointer"
+                  <span
+                    className="inline-flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase font-sans text-[#C05A46] hover:text-[#C05A46]/70 cursor-pointer transition-colors duration-300 ease-out"
                     data-testid="link-explore-menu"
                   >
                     Explore The Menu <ArrowRight className="w-3.5 h-3.5" />
-                  </motion.span>
+                  </span>
                 </Link>
               </motion.div>
             </motion.div>
@@ -220,15 +214,13 @@ export default function Home() {
                   />
                   <div className="absolute bottom-0 left-0 w-full h-px bg-[#C05A46] scale-x-0 peer-focus:scale-x-100 transition-transform duration-500 origin-left" />
                 </div>
-                <motion.button
+                <button
                   type="submit"
                   data-testid="btn-reserve-submit"
-                  whileHover={{ gap: "1.2rem", opacity: 0.8 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex items-center gap-3 text-[#C05A46] text-xs tracking-[0.25em] uppercase font-sans pb-4 border-b border-transparent"
+                  className="flex items-center gap-3 text-[#C05A46] hover:text-[#C05A46]/70 text-xs tracking-[0.25em] uppercase font-sans pb-4 border-b border-transparent transition-colors duration-300 ease-out"
                 >
                   Join <ArrowRight className="w-3.5 h-3.5" />
-                </motion.button>
+                </button>
               </motion.form>
             )}
           </motion.div>
@@ -295,15 +287,13 @@ export default function Home() {
               </h3>
             </div>
             <Link href="/events">
-              <motion.span
-                whileHover={{ letterSpacing: "0.14em" }}
-                transition={{ duration: 0.3 }}
-                className="inline-flex items-center gap-3 bg-transparent border border-white/20 text-white/70 hover:text-white hover:border-white/40 px-10 py-4 text-[10px] tracking-[0.22em] uppercase font-sans cursor-pointer transition-colors"
+              <span
+                className="inline-flex items-center gap-3 bg-transparent border border-white/20 hover:border-white/45 text-white/65 hover:text-white px-10 py-4 text-[10px] tracking-[0.22em] uppercase font-sans cursor-pointer transition-all duration-300 ease-out"
                 style={{ borderRadius: 0 }}
                 data-testid="link-events-cta"
               >
                 Inquire Now <ArrowRight className="w-3.5 h-3.5" />
-              </motion.span>
+              </span>
             </Link>
           </motion.div>
         </div>
