@@ -1,0 +1,29 @@
+The layout is a good start, but the design currently looks generic and lacks a true luxury, high-end "premium" feel. It feels too rigid and standard. We need to elevate the visual polish significantly to match an elite, editorial aesthetic. 
+
+Please refactor the website code using the following strict visual directives:
+
+1. RADICAL WHITESPACE (BREATHING ROOM)
+- Increase the vertical padding on all major sections drastically (use `py-32` or `py-40` in Tailwind). 
+- Let the elements breathe. Space out the headers from the subtext and buttons significantly (`space-y-8` or `space-y-12`). Luxury is defined by unused space.
+
+2. EDITORIAL TYPOGRAPHY & SCALE
+- The typography scale is too uniform. Make the main section headers much larger and more elegant. Use a high-end serif font like `Playfair Display` or `Cormorant Garamond` with thin, tracking-wide settings (`tracking-wide font-light`).
+- Contrast this by making the body text and labels smaller, lighter, and more spaced out (`text-xs` or `text-sm`, `tracking-widest`, `text-neutral-400`). 
+
+3. ASYMMETRY & LAYOUT FLUIDITY
+- Break the perfectly symmetrical grids. For the photo and menu sections, use an alternating, asymmetric editorial layout (e.g., a large image taking up 7 columns, and a minimal text block offset in the remaining columns with ample whitespace around it).
+- It should feel like browsing a luxury architectural or fashion lookbook, not a standard Bootstrap template.
+
+4. PREMIUM COLOR DEPTH
+- Instead of harsh pure black (#000000) or flat gray, use a layered, rich dark palette. Use an incredibly deep charcoal-obsidian blend for backgrounds (`bg-[#121212]` or `bg-[#0D0D0D]`).
+- For card containers or subtle shifts, use a translucent glassmorphism or a microscopic border (`border-white/[0.06] bg-white/[0.02] backdrop-blur-md`).
+
+5. FLUID MICROMOVEMENTS (FRAMER MOTION)
+- Implement ultra-smooth, slow micro-interactions. 
+- Ensure elements smoothly fade and drift upward from a subtle distance as the user scrolls into view (`initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}`).
+- Buttons should not have harsh hover colors; instead, animate a subtle border glow, a soft background opacity shift, or a text letter-spacing expansion on hover.
+
+6. PHOTOGRAPHY FRAMEWORK
+- Apply a subtle overlay mask or a light mix-blend-mode to image containers so that the imagery perfectly coordinates with the deep background colors. Images should have sharp, precise aspect ratios (like an elegant `aspect-[3/4]` or `aspect-[16/10]`).
+
+Re-code the page now with these strict luxury constraints applied to every single pixel.
