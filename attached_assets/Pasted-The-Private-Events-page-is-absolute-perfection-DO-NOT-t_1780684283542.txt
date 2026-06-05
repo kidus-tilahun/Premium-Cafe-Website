@@ -1,0 +1,22 @@
+The Private Events page is absolute perfection—DO NOT touch or alter any code inside the private events page or route. 
+
+However, the Homepage looks broken on mobile viewports. The layout, colors, and typography are exactly what I want, but the responsiveness is failing. We need to fix the layout scaling and text constraints specifically for mobile screens without changing the actual aesthetic.
+
+Please apply the following exact layout fixes to the Homepage code:
+
+1. FORCE HERO TEXT BELOW NAVBAR (MOBILE ONLY)
+- Issue: On mobile, the main hero header text is still colliding with or sliding underneath the navigation bar.
+- Fix: On the homepage hero section wrapper, use Tailwind’s conditional padding. Set `pt-32` (or whatever height clears your navbar) specifically for mobile, and reset it using `md:pt-0` for desktop if you are using an absolute centering mechanism. The text must sit completely in the clear on a phone.
+
+2. FLUID HERO TYPOGRAPHY SCALING
+- Issue: The main serif hero header text ("Specialty Coffee & House-Baked Pastries...") is likely too massive on mobile, forcing awkward text wraps or clipping.
+- Fix: Use responsive text sizing on that header. Instead of a blanket massive size, scale it smoothly: `text-3xl sm:text-4xl md:text-5xl lg:text-7xl`. This ensures it automatically shrinks to a tight, elegant, readable scale on mobile screens but remains grand and editorial on desktop.
+
+3. GRID-TO-VERTICAL COLLAPSE FOR HOMEPAGE SECTIONS
+- Issue: Sections on the homepage that look great as side-by-side columns on desktop are cramping up on mobile.
+- Fix: Ensure every multi-column layout on the homepage uses `grid-cols-1 md:grid-cols-2` (or `flex-col md:flex-row`). On mobile, elements MUST stack vertically with generous breathing room (`space-y-12` or `gap-y-12`), only splitting into side-by-side columns on medium (`md:`) screens and above.
+
+4. CONTAINER LOCKS
+- Ensure the main wrappers on the homepage use `w-full max-w-7xl mx-auto px-6 md:px-12`. This stops content from bleeding off the edges of phone screens while keeping it perfectly aligned on laptops.
+
+Review the homepage (`app/page.tsx`) and its specific sub-components. Fix the responsiveness constraints now while preserving 100% of the current colors, typography choices, and the untouched Private Events page.

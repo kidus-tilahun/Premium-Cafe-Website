@@ -36,7 +36,7 @@ export default function Home() {
     <main className="w-full overflow-x-hidden bg-[#F9F6F0] text-[#1A1A1A]">
 
       {/* ─── Section 1: Hero ─── */}
-      <section className="relative w-full h-[100dvh] flex flex-col justify-end pb-20 md:pb-32 overflow-hidden">
+      <section className="relative w-full h-[100dvh] flex flex-col justify-center md:justify-end pb-12 md:pb-32 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center scale-105"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1600&q=80')" }}
@@ -44,40 +44,39 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/75" />
         <div className="absolute inset-0 mix-blend-multiply bg-[#1A1A1A]/20" />
 
-        <div className="absolute top-0 left-0 right-0 pt-20 pb-5 md:py-5 px-8 md:px-16 flex justify-between items-center z-20">
+        <div className="absolute top-0 left-0 right-0 pt-20 pb-5 md:py-5 px-6 md:px-16 flex justify-between items-center z-20">
           <span data-testid="utility-hours" className="text-[10px] tracking-[0.3em] uppercase text-white/55 font-sans">
             Open Until 7 PM
           </span>
-          <span data-testid="utility-location" className="flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase text-white/55 font-sans">
+          <span data-testid="utility-location" className="hidden sm:flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase text-white/55 font-sans">
             <MapPin className="w-3 h-3" /> 4th &amp; Main St, Austin TX
           </span>
         </div>
 
-        <div className="relative z-10 px-8 md:px-16 lg:px-24 max-w-6xl">
+        <div className="relative z-10 pt-28 md:pt-0 px-6 md:px-16 lg:px-24 max-w-6xl">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={stagger}
           >
-            <motion.p variants={reveal} className="text-[10px] tracking-[0.35em] uppercase text-white/45 mb-8 font-sans">
+            <motion.p variants={reveal} className="text-[10px] tracking-[0.35em] uppercase text-white/45 mb-6 md:mb-8 font-sans">
               Downtown Austin, Texas
             </motion.p>
             <motion.h1
               variants={reveal}
-              className="font-serif font-light text-white leading-[0.92] tracking-tight mb-10"
-              style={{ fontSize: "clamp(3.5rem, 10vw, 9.5rem)" }}
+              className="font-serif font-light text-white leading-[0.92] tracking-tight mb-8 md:mb-10 text-4xl sm:text-5xl md:text-7xl lg:text-8xl"
             >
               Specialty Coffee<br />
               <span className="italic">&amp; House-Baked</span><br />
               Pastries.
             </motion.h1>
-            <motion.p variants={reveal} className="text-sm text-white/55 font-sans font-light tracking-wide mb-12 max-w-sm">
-              Sourced from the world&apos;s finest small farms.<br />Crafted with intention.
+            <motion.p variants={reveal} className="text-sm text-white/55 font-sans font-light tracking-wide mb-10 md:mb-12 max-w-sm">
+              Sourced from the world&apos;s finest small farms. Crafted with intention.
             </motion.p>
-            <motion.div variants={reveal} className="flex flex-col sm:flex-row gap-4">
+            <motion.div variants={reveal} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Link href="/menu">
                 <span
-                  className="inline-flex items-center justify-center bg-[#C05A46] hover:bg-[#C05A46]/85 text-white px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-sans font-medium cursor-pointer transition-all duration-300 ease-out"
+                  className="inline-flex items-center justify-center bg-[#C05A46] hover:bg-[#C05A46]/85 text-white px-8 md:px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-sans font-medium cursor-pointer transition-all duration-300 ease-out w-full sm:w-auto"
                   style={{ borderRadius: 0 }}
                   data-testid="link-order-now"
                 >
@@ -86,7 +85,7 @@ export default function Home() {
               </Link>
               <Link href="/menu">
                 <span
-                  className="inline-flex items-center justify-center border border-white/30 hover:border-white/60 hover:bg-white/[0.08] text-white px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-sans font-medium cursor-pointer transition-all duration-300 ease-out"
+                  className="inline-flex items-center justify-center border border-white/30 hover:border-white/60 hover:bg-white/[0.08] text-white px-8 md:px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-sans font-medium cursor-pointer transition-all duration-300 ease-out w-full sm:w-auto"
                   style={{ borderRadius: 0 }}
                   data-testid="link-view-menu"
                 >
@@ -99,27 +98,25 @@ export default function Home() {
       </section>
 
       {/* ─── Section 2: Editorial Philosophy ─── */}
-      <section className="py-40 bg-[#F9F6F0]">
-        <div className="px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
-          <div className="grid grid-cols-12 gap-8 items-center">
+      <section className="py-20 md:py-32 lg:py-40 bg-[#F9F6F0]">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-12 md:gap-x-16 items-center">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={stagger}
-              className="col-span-12 md:col-span-5"
             >
               <motion.p variants={reveal} className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-8 font-sans">
                 Our Philosophy
               </motion.p>
               <motion.h2
                 variants={reveal}
-                className="font-serif font-light leading-[0.93] tracking-tight text-[#1A1A1A] mb-10"
-                style={{ fontSize: "clamp(2.5rem, 5vw, 5.5rem)" }}
+                className="font-serif font-light leading-[0.93] tracking-tight text-[#1A1A1A] mb-8 md:mb-10 text-4xl sm:text-5xl md:text-5xl lg:text-6xl"
               >
                 A quiet place<br />to think<br /><span className="italic text-neutral-400">clearly.</span>
               </motion.h2>
-              <motion.p variants={reveal} className="text-sm text-neutral-400 font-sans font-light leading-relaxed max-w-xs mb-10">
+              <motion.p variants={reveal} className="text-sm text-neutral-400 font-sans font-light leading-relaxed mb-10">
                 We designed every corner of Driftwood with one question: what does it feel like to finally slow down? The coffee is the answer. So is the silence.
               </motion.p>
               <motion.div variants={reveal}>
@@ -137,9 +134,9 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.9, ease: "easeOut" }}
-              className="col-span-12 md:col-span-6 md:col-start-7 aspect-[3/4] overflow-hidden"
+              className="aspect-[3/4] overflow-hidden"
             >
               <img
                 src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&q=80"
@@ -153,7 +150,7 @@ export default function Home() {
       </section>
 
       {/* ─── Section 3: The Reserve List ─── */}
-      <section className="w-full py-40 bg-[#0D0D0D] relative overflow-hidden">
+      <section className="w-full py-20 md:py-32 lg:py-40 bg-[#0D0D0D] relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -161,26 +158,25 @@ export default function Home() {
               "radial-gradient(circle at 20% 80%, #C05A46 0%, transparent 50%), radial-gradient(circle at 80% 20%, #C05A46 0%, transparent 50%)",
           }}
         />
-        <div className="relative z-10 px-8 md:px-16 lg:px-24 max-w-5xl mx-auto">
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 lg:px-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
+            viewport={{ once: true, amount: 0.2 }}
             variants={stagger}
             className="flex flex-col items-start"
           >
-            <motion.p variants={reveal} className="text-[10px] tracking-[0.35em] uppercase text-[#C05A46]/65 mb-12 font-sans">
+            <motion.p variants={reveal} className="text-[10px] tracking-[0.35em] uppercase text-[#C05A46]/65 mb-8 md:mb-12 font-sans">
               Membership
             </motion.p>
             <motion.h2
               variants={reveal}
-              className="font-serif font-light text-white leading-[0.93] tracking-tight mb-12"
-              style={{ fontSize: "clamp(2.8rem, 7vw, 7.5rem)" }}
+              className="font-serif font-light text-white leading-[0.93] tracking-tight mb-8 md:mb-12 text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
             >
               Become a member<br />of the<br />
               <span className="italic text-white/65">Reserve List.</span>
             </motion.h2>
-            <motion.p variants={reveal} className="text-sm text-white/38 font-sans font-light leading-relaxed max-w-md mb-16">
+            <motion.p variants={reveal} className="text-sm text-white/38 font-sans font-light leading-relaxed max-w-md mb-12 md:mb-16">
               Receive an invitation for a complimentary single-origin pour-over on your first visit,
               alongside exclusive small-batch drops before they reach the bar.
             </motion.p>
@@ -228,19 +224,18 @@ export default function Home() {
       </section>
 
       {/* ─── Section 4: Testimonials ─── */}
-      <section className="w-full py-40 bg-[#121212]">
-        <div className="px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
+      <section className="w-full py-20 md:py-32 lg:py-40 bg-[#121212]">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={reveal}
-            className="mb-20"
+            className="mb-14 md:mb-20"
           >
             <p className="text-[10px] tracking-[0.35em] uppercase text-white/25 mb-6 font-sans">Guest Experience</p>
             <h2
-              className="font-serif font-light text-white leading-[0.93] tracking-tight"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 6rem)" }}
+              className="font-serif font-light text-white leading-[0.93] tracking-tight text-4xl sm:text-5xl md:text-5xl lg:text-6xl"
             >
               What Our<br /><span className="italic text-white/45">Guests Say.</span>
             </h2>
@@ -274,13 +269,12 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={reveal}
-            className="border-t border-white/[0.06] pt-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-8"
+            className="border-t border-white/[0.06] pt-12 md:pt-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-8"
           >
             <div>
               <p className="text-[10px] tracking-[0.35em] uppercase text-white/25 mb-4 font-sans">Private Hire</p>
               <h3
-                className="font-serif font-light text-white leading-tight"
-                style={{ fontSize: "clamp(1.6rem, 3vw, 3rem)" }}
+                className="font-serif font-light text-white leading-tight text-3xl sm:text-4xl md:text-4xl lg:text-5xl"
               >
                 Host your next event<br />
                 <span className="italic text-white/45">at Driftwood.</span>
@@ -300,18 +294,17 @@ export default function Home() {
       </section>
 
       {/* ─── Footer ─── */}
-      <footer className="w-full bg-[#0D0D0D] pt-24 pb-12">
-        <div className="px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
-          <div className="border-t border-white/[0.05] pt-16 mb-20">
+      <footer className="w-full bg-[#0D0D0D] pt-16 md:pt-24 pb-12">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+          <div className="border-t border-white/[0.05] pt-10 md:pt-16 mb-12 md:mb-20 overflow-hidden">
             <p
-              className="font-serif font-light text-white/08 leading-none tracking-tight select-none"
-              style={{ fontSize: "clamp(4rem, 14vw, 14rem)" }}
+              className="font-serif font-light text-white/[0.08] leading-none tracking-tight select-none text-[4rem] sm:text-[6rem] md:text-[10rem] lg:text-[14rem]"
             >
               Driftwood.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-16 md:mb-20">
             <div>
               <p className="text-[10px] tracking-[0.3em] uppercase text-white/25 mb-5 font-sans">About</p>
               <p className="text-sm text-white/45 font-sans font-light leading-relaxed">
