@@ -1,4 +1,3 @@
-import { Link } from "wouter";
 import { Instagram, Twitter } from "lucide-react";
 
 export default function Footer() {
