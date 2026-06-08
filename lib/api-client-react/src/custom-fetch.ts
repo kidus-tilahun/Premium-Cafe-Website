@@ -18,6 +18,29 @@ const DEFAULT_JSON_ACCEPT = "application/json, application/problem+json";
 let _baseUrl: string | null = null;
 let _authTokenGetter: AuthTokenGetter | null = null;
 
+export type ApiClientConfig = {
+  baseUrl?: string | null;
+  authTokenGetter?: AuthTokenGetter | null;
+};
+
+/**
+ * One-shot configuration for the shared API client (base URL + optional auth).
+ * Relative paths such as `/api/events/inquire` are resolved against `baseUrl`
+ * when set; otherwise the browser uses same-origin routing (e.g. Replit `/api` proxy).
+ */
+export function configureApiClient(config: ApiClientConfig = {}): void {
+  if ("baseUrl" in config) {
+    setBaseUrl(config.baseUrl ?? null);
+  }
+  if ("authTokenGetter" in config) {
+    setAuthTokenGetter(config.authTokenGetter ?? null);
+  }
+}
+
+export function getBaseUrl(): string | null {
+  return _baseUrl;
+}
+
 /**
  * Set a base URL that is prepended to every relative request URL
  * (i.e. paths that start with `/`).

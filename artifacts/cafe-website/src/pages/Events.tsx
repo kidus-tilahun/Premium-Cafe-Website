@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { ArrowRight, Users, Camera, Briefcase } from "lucide-react";
+import { useCreateEventInquiry } from "@workspace/api-client-react";
 
 const EVENT_TYPES = [
   {
@@ -22,6 +23,14 @@ const EVENT_TYPES = [
 
 const STEPS = ["About You", "Your Event", "Final Details"];
 
+const GUEST_COUNT_MAP: Record<string, number> = {
+  "1-15": 15,
+  "16-30": 30,
+  "31-60": 60,
+  "60+": 100,
+  "crew-only": 1,
+};
+
 const reveal: Variants = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
@@ -29,7 +38,8 @@ const reveal: Variants = {
 
 interface FormData {
   name: string;
-  email: string;
+  phone: string;
+  telegram: string;
   eventType: string;
   date: string;
   guestCount: string;
@@ -41,24 +51,53 @@ export default function EventsPage() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState<FormData>({
     name: "",
-    email: "",
+    phone: "",
+    telegram: "",
     eventType: "",
     date: "",
     guestCount: "",
     message: "",
   });
 
+  const { mutate, isPending, isError, error } = useCreateEventInquiry();
+
   const update = (field: keyof FormData, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
   const canAdvance = () => {
-    if (step === 0) return form.name.trim() !== "" && form.email.trim() !== "";
+    if (step === 0) return form.name.trim() !== "" && form.phone.trim() !== "";
     if (step === 1) return form.eventType !== "" && form.date !== "" && form.guestCount !== "";
     return true;
   };
 
+  const contactSummary = form.telegram.trim()
+    ? `@${form.telegram.trim().replace(/^@+/, "")} on Telegram`
+    : form.phone;
+
   const handleSubmit = () => {
-    if (canAdvance()) setSubmitted(true);
+    if (!canAdvance() || isPending) return;
+
+    const guestCount = GUEST_COUNT_MAP[form.guestCount];
+    if (!guestCount) return;
+
+    mutate(
+      {
+        data: {
+          full_name: form.name.trim(),
+          phone: form.phone.trim(),
+          telegram_username: form.telegram.trim()
+            ? form.telegram.trim().replace(/^@+/, "")
+            : undefined,
+          event_type: form.eventType,
+          event_date: form.date,
+          guest_count: guestCount,
+          notes: form.message.trim() || undefined,
+        },
+      },
+      {
+        onSuccess: () => setSubmitted(true),
+      },
+    );
   };
 
   const inputClass =
@@ -198,7 +237,7 @@ export default function EventsPage() {
               We&apos;ll be in touch<br /><span className="italic text-white/50">within 24 hours.</span>
             </h3>
             <p className="text-sm text-white/35 font-sans font-light mt-4 max-w-sm">
-              A member of our events team will reach out to {form.email} shortly to discuss availability and pricing.
+              A member of our events team will reach out to you at {contactSummary} shortly to discuss availability and pricing.
             </p>
           </motion.div>
         ) : (
@@ -228,16 +267,28 @@ export default function EventsPage() {
                     </div>
                     <div className="relative group">
                       <input
-                        type="email"
-                        placeholder="Email Address"
-                        value={form.email}
-                        onChange={(e) => update("email", e.target.value)}
-                        data-testid="input-events-email"
+                        type="tel"
+                        placeholder="Phone Number"
+                        value={form.phone}
+                        onChange={(e) => update("phone", e.target.value)}
+                        data-testid="input-events-phone"
                         className={inputClass}
                         style={{ borderRadius: 0 }}
                       />
                       <div className="absolute bottom-0 left-0 w-full h-px bg-[#C05A46] scale-x-0 group-focus-within:scale-x-100 transition-transform duration-500 origin-left" />
                     </div>
+                  </div>
+                  <div className="relative group">
+                    <input
+                      type="text"
+                      placeholder="Telegram Username (optional)"
+                      value={form.telegram}
+                      onChange={(e) => update("telegram", e.target.value)}
+                      data-testid="input-events-telegram"
+                      className={inputClass}
+                      style={{ borderRadius: 0 }}
+                    />
+                    <div className="absolute bottom-0 left-0 w-full h-px bg-[#C05A46] scale-x-0 group-focus-within:scale-x-100 transition-transform duration-500 origin-left" />
                   </div>
                 </motion.div>
               )}
@@ -323,12 +374,23 @@ export default function EventsPage() {
                   </div>
                   <div className="flex flex-col gap-1 py-4 border-t border-white/[0.06]">
                     <p className="text-[10px] tracking-[0.25em] uppercase text-white/25 font-sans">Summary</p>
-                    <p className="text-sm text-white/50 font-sans font-light mt-2">{form.name} &middot; {form.email}</p>
+                    <p className="text-sm text-white/50 font-sans font-light mt-2">{form.name} &middot; {form.phone}</p>
                     <p className="text-sm text-white/35 font-sans font-light">{form.eventType} &middot; {form.date} &middot; {form.guestCount}</p>
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
+
+            {isError && (
+              <p
+                data-testid="msg-events-error"
+                className="mt-8 text-sm text-[#C05A46]/80 font-sans font-light"
+              >
+                {error instanceof Error
+                  ? error.message
+                  : "Something went wrong. Please try again or call us directly."}
+              </p>
+            )}
 
             <div className="flex justify-between items-center mt-12">
               {step > 0 ? (
@@ -357,11 +419,14 @@ export default function EventsPage() {
               ) : (
                 <button
                   onClick={handleSubmit}
+                  disabled={isPending}
                   data-testid="btn-events-submit"
-                  className="flex items-center gap-3 bg-[#C05A46] hover:bg-[#C05A46]/85 text-white px-10 py-4 text-[10px] tracking-[0.22em] uppercase font-sans transition-all duration-300 ease-out"
+                  className={`flex items-center gap-3 bg-[#C05A46] hover:bg-[#C05A46]/85 text-white px-10 py-4 text-[10px] tracking-[0.22em] uppercase font-sans transition-all duration-300 ease-out ${
+                    isPending ? "opacity-60 cursor-not-allowed" : ""
+                  }`}
                   style={{ borderRadius: 0 }}
                 >
-                  Send Inquiry <ArrowRight className="w-3.5 h-3.5" />
+                  {isPending ? "Sending…" : "Send Inquiry"} <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>

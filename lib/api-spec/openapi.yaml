@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: events
+    description: Private event inquiry operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,31 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /events/inquire:
+    post:
+      operationId: createEventInquiry
+      tags: [events]
+      summary: Submit a private event inquiry
+      description: Creates a new private event booking inquiry and notifies the owner via Telegram.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEventInquiryRequest"
+      responses:
+        "201":
+          description: Inquiry created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventInquiry"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +60,76 @@ components:
           type: string
       required:
         - status
-
+    CreateEventInquiryRequest:
+      type: object
+      required:
+        - full_name
+        - phone
+        - event_type
+        - event_date
+        - guest_count
+      properties:
+        full_name:
+          type: string
+          minLength: 1
+        phone:
+          type: string
+          minLength: 1
+        telegram_username:
+          type: string
+        event_type:
+          type: string
+          minLength: 1
+        event_date:
+          type: string
+          format: date
+        guest_count:
+          type: integer
+          minimum: 1
+        notes:
+          type: string
+    EventInquiry:
+      type: object
+      required:
+        - id
+        - created_at
+        - full_name
+        - phone
+        - event_type
+        - event_date
+        - guest_count
+        - status
+      properties:
+        id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        full_name:
+          type: string
+        phone:
+          type: string
+        telegram_username:
+          type: string
+        event_type:
+          type: string
+        event_date:
+          type: string
+        guest_count:
+          type: integer
+        notes:
+          type: string
+        status:
+          type: string
+          enum: [pending, confirmed, declined]
+    ValidationError:
+      type: object
+      properties:
+        title:
+          type: string
+        detail:
+          type: string
+      required:
+        - title
+        - detail
